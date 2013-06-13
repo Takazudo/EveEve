@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<script src="../eveeve.js"></script>
+<script>
+
+(function() {
+	
+	var ev = new EveEve;
+	ev.on('foo', function() {
+		console.log('foo!');
+	});
+	ev.trigger('foo');
+
+}());
+
+(function() {
+	
+	var ev = new EveEve;
+	ev.on('foo', function(data) {
+		console.log('foo!', data.prop);
+	});
+	ev.trigger('foo', {
+		prop: 'val'
+	});
+
+}());
+
+</script>
+</head>
+<body>
+</body>
+</html>
