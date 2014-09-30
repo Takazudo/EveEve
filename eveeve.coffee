@@ -29,18 +29,19 @@ class ns.EveEve
     unless ev
       @_callbacks = {}
       return this
+   
+    evs = ev.split(' ')
+    for name in evs
 
-    list = @_callbacks?[ev]
-    return this unless list
-
-    unless callback
-      delete @_callbacks[ev]
-      return this
-
-    for cb, i in list when cb is callback
-      list = list.slice()
-      list.splice(i, 1)
-      @_callbacks[ev] = list
-      break
+      list = @_callbacks?[name]
+      
+      if list
+        if callback
+          for cb, i in list when cb is callback
+            list = list.slice()
+            list.splice(i, 1)
+            @_callbacks[name] = list
+        else
+          delete @_callbacks[name]
 
     return this

@@ -19,13 +19,48 @@
 (function() {
 	
 	var ev = new EveEve;
+  
 	ev.on('foo', function(data) {
 		console.log('foo!', data.prop);
 	});
 	ev.trigger('foo', {
 		prop: 'val'
 	});
+	
+}());
+	
+(function() {
+	
+	var ev = new EveEve;
+	
+	var cb = function() {
+		console.log('moo or mew!');
+	};
+	ev.on('moo mew', cb);
+	ev.trigger('moo');
+	ev.trigger('mew');
+	ev.off('moo mew', cb);
+	ev.trigger('moo'); // will not be fired
+	ev.trigger('mew'); // will not be fired
+	
+}());
 
+(function() {
+	
+	var ev = new EveEve;
+	
+	var cb = function() {
+		console.log('hoge or foo or bar');
+	};
+	ev.on('hoge foo bar', cb);
+	ev.trigger('hoge');
+	ev.trigger('foo');
+	ev.trigger('bar');
+	ev.off('hoge foo bar');
+	ev.trigger('hoge'); // will not be fired
+	ev.trigger('foo'); // will not be fired
+	ev.trigger('bar'); // will not be fired
+	
 }());
 
 </script>
